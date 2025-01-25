@@ -11,4 +11,4 @@ gem "minitest", "~> 5.16"
 
 gem "standard", "~> 1.3"
 
-gem "webmock", "~> 3.14"
+gem "webmock", "~> 3.24"
