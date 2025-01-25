@@ -1,6 +1,6 @@
 # SpreadshopClient
 
-
+[![Gem Version](https://badge.fury.io/rb/spreadshop_client.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/spreadshop_client)
 [![Build Status](https://github.com/paderich/spreadshop_client/actions/workflows/main.yml/badge.svg)](https://github.com/paderich/spreadshop_client/actions)
 
 `SpreadshopClient` is a Ruby gem that provides a convenient interface for interacting with the Spreadshop GraphQL API. It simplifies fetching shop data by encapsulating the necessary queries and handling the API communication, making it easy to integrate into your Ruby projects or Rails applications.
