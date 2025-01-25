@@ -7,4 +7,7 @@ class TestSpreadshopClient < Minitest::Test
     refute_nil ::SpreadshopClient::VERSION
   end
 
+  def test_client_is_not_accessible
+    assert_raises(NameError) { SpreadshopClient::Client }
+  end
 end
