@@ -1,43 +1,72 @@
 # SpreadshopClient
 
-TODO: Delete this and the text below, and describe your gem
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/spreadshop_client`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://github.com/paderich/spreadshop_client/actions/workflows/main.yml/badge.svg)](https://github.com/paderich/spreadshop_client/actions)
+
+`SpreadshopClient` is a Ruby gem that provides a convenient interface for interacting with the Spreadshop GraphQL API. It simplifies fetching shop data by encapsulating the necessary queries and handling the API communication, making it easy to integrate into your Ruby projects or Rails applications.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Add this line to your application's Gemfile:
+```ruby
+gem 'spreadshop_client'
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+And then execute:
+```ruby
+bundle install
 ```
 
+Or install it yourself as:
+```ruby
+gem install spreadshop_client
+```
 ## Usage
+Here's an example of how to use the SpreadshopClient gem to fetch shop details:
+```ruby
+require 'spreadshop_client'
 
-TODO: Write usage instructions here
+name = "my-shop"       # Replace with the actual shop name
+platform = "EU"           # Replace with the platform
+locale = "de_DE"          # Replace with the locale
 
-## Development
+response = SpreadshopClient.get_shop(name: name, platform: platform, locale: locale)
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+if response.is_a?(SpreadshopClient::Shop)
+  puts "Shop ID: #{response.id}"
+  puts "Shop Name: #{response.name}"
+elsif response.is_a?(Hash) && response[:error]
+  puts "Error: #{response[:error]}"
+else
+  puts "Unexpected response: #{response.inspect}"
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## Development and Testing
+### Run Tests:
+```ruby
+rake test
+```
+
+### Check Code Style:
+
+The project uses StandardRB to ensure consistent coding style. Run the linter with:
+```ruby
+rake standard
+```
+### Run StandardRB Auto-Fix:
+```ruby
+rake standard:fix
+```
+
+
+
 
 ## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/spreadshop_client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/spreadshop_client/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/paderich/spreadshop_client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the code of conduct.
 
 ## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the MIT License.
 
 ## Code of Conduct
-
-Everyone interacting in the SpreadshopClient project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/spreadshop_client/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SpreadshopClient project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
