@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Paderich"]
   spec.email = ["paderich@protonmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "Spreadshop GraphQL API client"
+  spec.description = "This gems provides a client for the Spreadshop GraphQL API."
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
