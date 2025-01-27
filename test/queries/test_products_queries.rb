@@ -3,7 +3,7 @@ require "test_helper"
 class TestProductQueries < Minitest::Test
   def setup
     @endpoint = "https://api.spreadshop.com/v1/graphql"
-    @get_products_query = SpreadshopClient::Queries::ProductsQueries::GET_PRODUCTS
+    @get_products_query = SpreadshopClient::Models::ProductsQueries::GET_PRODUCTS
   end
 
   def test_get_all_products
@@ -66,7 +66,7 @@ class TestProductQueries < Minitest::Test
     assert_equal 2, products.size
 
     first_product = products.first
-    assert_instance_of SpreadshopClient::Product, first_product
+    assert_instance_of SpreadshopClient::Models::ProductModel, first_product
     assert_equal "product_1", first_product.id
     assert_equal "Product One", first_product.name
     assert_equal "image_url_1", first_product.image["src"]
@@ -118,15 +118,37 @@ class TestProductQueries < Minitest::Test
       )
 
     product = SpreadshopClient::Product.get_by_id(product_id: "product_1", shop_id: "12345", platform: "test_platform", locale: "en_US")
-    assert_instance_of SpreadshopClient::Product, product
+    assert_instance_of SpreadshopClient::Models::ProductModel, product
     assert_equal "product_1", product.id
     assert_equal "Product One", product.name
     assert_equal "image_url_1", product.image["src"]
     assert_equal 10.99, product.price["vatIncluded"]
 
     # Test for a non-existent product
+    stub_request(:post, @endpoint)
+      .with(
+        body: {
+          query: @get_products_query,
+          variables: {
+            shopId: "12345",
+            platform: "test_platform",
+            locale: "en_US"
+          }
+        }.to_json,
+        headers: {"Content-Type" => "application/json"}
+      )
+      .to_return(
+        status: 200,
+        body: {
+          data: {
+            products: {
+              items: []
+            }
+          }
+        }.to_json
+      )
+
     product_not_found = SpreadshopClient::Product.get_by_id(product_id: "nonexistent_product", shop_id: "12345", platform: "test_platform", locale: "en_US")
-    assert_instance_of Hash, product_not_found
-    assert_equal "Product not found", product_not_found[:error]
+    assert_nil product_not_found
   end
 end
