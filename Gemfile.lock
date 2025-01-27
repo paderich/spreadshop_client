@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spreadshop_client (0.0.1)
+    spreadshop_client (0.0.2)
 
 GEM
   remote: https://rubygems.org/
