@@ -15,6 +15,7 @@ module SpreadshopClient
     def self.get_shop(name:, platform:, locale:)
       response = SpreadshopClient::Client.query(GET_SHOP, {name: name, platform: platform, locale: locale})
       if response["data"] && response["data"]["shop"]
+        puts response.inspect
         new(response["data"]["shop"])
       else
         {error: response["errors"] || "Unknown error"}
