@@ -49,7 +49,7 @@ To fetch all products from a shop, you can use the SpreadshopClient as follows:
 ```ruby
 require 'spreadshop_client'
 
-shop_id = "1394271"       # Replace with the actual shop ID
+shop_id = "123456"       # Replace with the actual shop ID
 platform = "EU"           # Replace with the platform
 locale = "de_DE"          # Replace with the locale
 
