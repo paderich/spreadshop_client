@@ -1,5 +1,5 @@
 module SpreadshopClient
-  module Queries
+  module Models
     module ProductsQueries
       GET_PRODUCTS = <<~GQL.strip
         query($shopId: ID!, $platform: Platform!, $locale: Locale!) {
